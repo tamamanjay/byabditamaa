@@ -1,0 +1,243 @@
+body {
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #0a0a0a; /* Hitam pekat */
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Kontainer Utama */
+#question-container,
+#thanks-container {
+  text-align: center;
+  color: white;
+  width: 100%;
+  height: 100%;
+}
+
+/* Teks Utama (Pertanyaan dan Ucapan Terima Kasih) */
+h1,
+.message p {
+  font-size: clamp(1.5rem, 5vw, 2.5rem); /* Ukuran font responsif */
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+    0 0 20px rgba(173, 216, 230, 0.7), 0 0 35px rgba(173, 216, 230, 0.5); /* Efek bersinar putih kebiruan */
+  margin-bottom: 30px;
+}
+
+.secondary-text {
+  font-size: clamp(1rem, 4vw, 1.5rem) !important;
+  font-weight: 400 !important;
+}
+
+/* Kontainer Tombol */
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Jarak antara tombol Iya dan Tidak */
+  height: 50px; /* Beri ruang agar tombol tidak lari keluar */
+  position: relative; /* Diperlukan untuk posisi absolut tombol 'Tidak' */
+}
+
+button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  cursor: pointer;
+  font-weight: 600;
+  color: #1a1a1a;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, top 0.4s ease,
+    left 0.4s ease;
+}
+
+#yes-btn {
+  background: linear-gradient(145deg, #ffffff, #d4eaf0);
+  box-shadow: 0 4px 15px rgba(173, 216, 230, 0.4);
+}
+
+#yes-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(173, 216, 230, 0.6);
+}
+
+#no-btn {
+  background: linear-gradient(145deg, #ffb8b8, #ff8a8a);
+  position: absolute; /* Tombol akan 'lari', posisinya diatur JS */
+}
+
+/* Halaman Terima Kasih & Penyesuaian Layout 30/70 */
+#thanks-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Mulai dari atas */
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 15vh; /* Beri jarak 15% dari atas untuk teks */
+}
+
+.message {
+  z-index: 10;
+  flex-shrink: 0; /* Pastikan teks tidak mengecil */
+}
+
+.logo {
+  position: absolute;
+  bottom: 20px;
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: 0 0 5px rgba(173, 216, 230, 0.5);
+  z-index: 10;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Kontainer Animasi Bunga (Mengisi 70% bawah) */
+#flower-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 85vh; /* Mengisi bagian bawah layar */
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Styling Bunga Tulip (Semi 3D & Realistis) */
+.tulip {
+  position: absolute;
+  bottom: -100%; /* Mulai jauh di bawah */
+  transform-origin: bottom center;
+  filter: drop-shadow(0 0 15px rgba(173, 216, 230, 0.6));
+}
+
+.tulip-body {
+  position: relative;
+  width: 100px; /* Lebar dasar */
+  height: 300px; /* Tinggi dasar */
+}
+
+.tulip-body .stem {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 12px; /* Tangkai lebih tebal */
+  height: 100%;
+  background: linear-gradient(to top, #2e6b2e, #6ab06a);
+  border-radius: 10px;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* Membuat lengkungan pada tangkai */
+.tulip-body .stem::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: inherit;
+  transform: skewX(var(--skew-amount, 5deg));
+}
+
+.tulip-body .leaf {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  width: 50px; /* Daun lebih besar */
+  height: 100px;
+  background: linear-gradient(to top, #3a8a3a, #5cb85c);
+  border-radius: 100% 0% 100% 0% / 50% 100% 0% 50%;
+  transform-origin: bottom left;
+  z-index: 2;
+}
+
+.tulip-body .leaf.left {
+  transform: translateX(-90%) rotate(-30deg);
+}
+
+.tulip-body .leaf.right {
+  bottom: 80px;
+  transform: translateX(20%) rotate(25deg) scaleX(-1);
+}
+
+.tulip-body .flower {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 90px;
+  z-index: 3;
+}
+
+.tulip-body .petal {
+  position: absolute;
+  width: 45px;
+  height: 80px;
+  background: linear-gradient(to top, #add8e6, #f0f8ff);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50% 50% 0 0;
+  transform-origin: bottom center;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.9),
+    inset 5px 0 15px rgba(135, 206, 235, 0.4);
+}
+
+.tulip-body .petal-1 {
+  transform: translateX(-50%) rotate(-25deg);
+  left: 50%;
+}
+.tulip-body .petal-2 {
+  transform: translateX(-50%) rotate(25deg);
+  left: 50%;
+}
+.tulip-body .petal-3 {
+  transform: translateX(-50%) rotate(0deg) scale(1.1) translateZ(-5px);
+  left: 50%;
+  background: linear-gradient(to top, #a0cde0, #e6f5ff);
+}
+
+/* Animasi Kunang-kunang */
+.firefly {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #fffacd;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #fffacd, 0 0 20px #fffacd, 0 0 30px #fffacd;
+  animation: moveFirefly 15s linear infinite;
+  z-index: 0;
+  /* Penting: pointer-events none agar tidak mengganggu interaksi lain */
+  pointer-events: none;
+}
+
+/* ANIMASI KUNANG-KUNANG SUDAH DIPERBARUI */
+@keyframes moveFirefly {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(0.8);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translate(var(--tx1), var(--ty1)) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(var(--tx2), var(--ty2)) scale(1.2);
+    opacity: 1;
+  }
+  75% {
+    transform: translate(var(--tx1), var(--ty1)) scale(1);
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sebuah Pertanyaan Untukmu</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Kontainer Pertanyaan Awal -->
+    <div id="question-container">
+      <h1 id="question-text">Apakah kamu suka sama aku?</h1>
+      <div class="buttons">
+        <button id="yes-btn">Iya</button>
+        <!-- Tombol 'Tidak' akan diposisikan oleh JavaScript -->
+        <button id="no-btn">Tidak</button>
+      </div>
+    </div>
+
+    <!-- Kontainer Halaman Terima Kasih (Awalnya Tersembunyi) -->
+    <div id="thanks-container" class="hidden">
+      <div class="message">
+        <p>Terima kasih ini buatmu</p>
+        <p class="secondary-text">Terimakasih telah menjawabnya</p>
+      </div>
+      <div id="flower-container">
+        <!-- Animasi bunga akan muncul di sini -->
+      </div>
+      <!-- Kunang-kunang akan ditambahkan di sini oleh JS -->
+      <div class="logo">
+        <!-- TULISAN LOGO SUDAH DIPERBARUI -->
+        <p>by abditama</p>
+      </div>
+    </div>
+
+    <!-- Memuat Library Animasi (GSAP) & Script Kustom -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
